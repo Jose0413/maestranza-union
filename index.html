@@ -168,25 +168,26 @@
   <div class="contact-grid">
     <div class="ticket reveal">
       <div class="ticket-head"><span>Orden de trabajo</span><span>N.º 001</span></div>
-      <form id="contact-form">
+      <form id="contact-form" action="https://formspree.io/f/mqpzqale" method="POST">
         <div class="field">
           <label for="nombre">Nombre</label>
-          <input id="nombre" type="text" placeholder="Tu nombre" required>
+          <input id="nombre" name="nombre" type="text" placeholder="Tu nombre" required>
         </div>
         <div class="field">
           <label for="correo">Correo</label>
-          <input id="correo" type="email" placeholder="tu@correo.cl" required>
+          <input id="correo" name="correo" type="email" placeholder="tu@correo.cl" required>
         </div>
         <div class="field">
           <label for="telefono">Teléfono</label>
-          <input id="telefono" type="tel" placeholder="+56 9 ____ ____">
+          <input id="telefono" name="telefono" type="tel" placeholder="+56 9 ____ ____">
         </div>
         <div class="field">
           <label for="proyecto">Cuéntanos tu proyecto</label>
-          <textarea id="proyecto" placeholder="Tipo de estructura, dimensiones aproximadas, ubicación..." required></textarea>
+          <textarea id="proyecto" name="proyecto" placeholder="Tipo de estructura, dimensiones aproximadas, ubicación..." required></textarea>
         </div>
+        <input type="hidden" name="_subject" value="Nueva solicitud desde la web — Maestranza Union">
         <button class="submit-btn" type="submit">Enviar solicitud</button>
-        <p class="form-note">Respondemos dentro de 48 horas hábiles con una cotización preliminar.</p>
+        <p class="form-note" id="form-note">Respondemos dentro de 48 horas hábiles con una cotización preliminar.</p>
       </form>
     </div>
     <div class="info-list reveal" style="transition-delay:.1s">

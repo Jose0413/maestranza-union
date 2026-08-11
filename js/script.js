@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } catch (err) {
         btn.disabled = false;
         btn.textContent = originalBtnText;
-        if (note) note.textContent = 'No pudimos enviar el mensaje. Escríbenos directo a contacto@maestranzaunion.cl';
+        if (note) note.textContent = 'No pudimos enviar el mensaje. Escríbenos directo a alejandrocarenotoro@yahoo.cl';
       }
     });
   }
