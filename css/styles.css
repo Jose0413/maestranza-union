@@ -230,7 +230,7 @@ h1,h2,h3{ font-family:var(--display); font-weight:700; line-height:1.08; }
   box-shadow:0 20px 44px rgba(18,24,31,0.18);
   margin-top:26px;
 }
-.nosotros-photo img{ width:100%; height:260px; object-fit:cover; }
+.nosotros-photo img{ width:100%; height:260px; object-fit:cover; object-position:center 78%; }
 
 .plate{
   border:1px solid var(--steel-line);
