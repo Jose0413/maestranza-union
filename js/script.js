@@ -37,14 +37,38 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  // Formulario de contacto (demo local — sin backend)
+  // Formulario de contacto — envío real vía Formspree
   const form = document.getElementById('contact-form');
   if (form) {
-    form.addEventListener('submit', (e) => {
+    const btn = form.querySelector('.submit-btn');
+    const note = document.getElementById('form-note');
+    const originalBtnText = btn.textContent;
+    const originalNoteText = note ? note.textContent : '';
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const btn = form.querySelector('.submit-btn');
-      btn.textContent = 'Solicitud enviada ✓';
       btn.disabled = true;
+      btn.textContent = 'Enviando...';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          btn.textContent = 'Solicitud enviada ✓';
+          if (note) note.textContent = 'Gracias, recibimos tu mensaje. Te responderemos dentro de 48 horas hábiles.';
+          form.reset();
+        } else {
+          throw new Error('Respuesta no válida del servidor');
+        }
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = originalBtnText;
+        if (note) note.textContent = 'No pudimos enviar el mensaje. Escríbenos directo a contacto@maestranzaunion.cl';
+      }
     });
   }
 });

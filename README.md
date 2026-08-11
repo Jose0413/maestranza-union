@@ -15,7 +15,8 @@ maestranza-union/
 ├── js/
 │   └── script.js       # Scroll reveal, nav lateral, formulario
 ├── assets/
-│   └── logo.png         # Logo de la empresa
+│   ├── logo.png          # Logo de la empresa
+│   └── gallery/          # Fotos reales del taller (hero, nosotros, servicios, galería)
 └── README.md
 ```
 
@@ -65,9 +66,26 @@ Todas estas opciones son gratuitas para un sitio estático como este y se conect
 
 **Recomendación:** si solo quieres algo simple y gratis conectado a tu repo, usa **GitHub Pages**. Si más adelante quieres dominio propio, certificados automáticos y despliegues más rápidos, **Netlify** o **Cloudflare Pages** son igual de gratuitos y un poco más cómodos de administrar.
 
+## Hacer que el formulario de contacto funcione (Vercel + Formspree)
+
+Vercel hostea el sitio, pero no procesa formularios por su cuenta (a diferencia de Netlify). El formulario ya está preparado para conectarse a **Formspree**, un servicio gratuito que recibe el envío y te lo manda al correo.
+
+1. Entra a [formspree.io](https://formspree.io) y crea una cuenta gratis (hasta 50 envíos al mes).
+2. Crea un nuevo formulario ("New Form") y usa tu correo de contacto, por ejemplo `contacto@maestranzaunion.cl`.
+3. Formspree te da un endpoint como `https://formspree.io/f/abcd1234`.
+4. Abre `index.html`, busca esta línea (dentro de la sección `#contacto`):
+   ```html
+   <form id="contact-form" action="https://formspree.io/f/TU_ID_DE_FORMSPREE" method="POST">
+   ```
+   y reemplaza `TU_ID_DE_FORMSPREE` por el ID que te dio Formspree.
+5. Guarda, haz `git add . && git commit -m "Conectar formulario" && git push`.
+6. Vercel vuelve a desplegar solo. Prueba el formulario en tu URL de Vercel — el primer envío real, Formspree te pedirá confirmar el formulario haciendo clic en un link que te llega al correo. Después de esa confirmación, los envíos llegan directo.
+
+No necesitas tocar nada más: `js/script.js` ya envía los datos por `fetch` y muestra "Solicitud enviada ✓" o un aviso de error si algo falla.
+
 ## Personalizar contenido
 
 - **Textos y datos de contacto:** edita directamente `index.html` (teléfono, correo, dirección están cerca del final, en la sección `#contacto`).
 - **Colores:** están centralizados como variables al inicio de `css/styles.css` (bloque `:root`), tomados del azul del logo (`#0A499A`).
 - **Logo:** reemplaza `assets/logo.png` por una versión en mayor resolución si la tienes, manteniendo el mismo nombre de archivo.
-- **Fotos reales:** las tarjetas de "Galería" y el fondo del "hero" usan degradados en vez de fotos. Para poner fotos reales, agrégalas a `assets/` y reemplaza el `style="background:..."` de cada `.gal-swatch` por `<img src="assets/tu-foto.jpg" alt="...">`.
+- **Fotos:** están en `assets/gallery/`. Para cambiar una foto, reemplaza el archivo manteniendo el mismo nombre, o agrega uno nuevo y actualiza la ruta `src="assets/gallery/..."` correspondiente en `index.html` (hero, sección Nosotros, tarjetas de Servicios y Galería).
